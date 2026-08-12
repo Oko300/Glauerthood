@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Glauerthood - Seadragons Whitelist</title>
+    <link href="https://fonts.googleapis.com/css2?family=Boogaloo&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-green: #4AE54A;
+            --dark-navy: #1A2A3A;
+            --purple-glow: #9333ea;
+            --white: #FFFFFF;
+            --light-grey: #CCC;
+            --heading-font: 'Boogaloo', cursive;
+            --body-font: 'Poppins', sans-serif;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: var(--body-font);
+            margin: 0;
+            background-color: var(--primary-green);
+            color: var(--white);
+            line-height: 1.6;
+            overflow-x: hidden;
+            position: relative;
+            padding-top: 70px;
+        }
+
+        /* Bubble Background */
+        .bubble-container {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            overflow: hidden;
+            z-index: -1;
+        }
+
+        .bubble {
+            position: absolute;
+            border-radius: 50%;
+            animation: floatUp var(--duration) infinite ease-in;
+            opacity: 0;
+        }
+
+        @keyframes floatUp {
+            0%   { transform: translateY(100vh) scale(0); opacity: 0; }
+            50%  { opacity: 1; }
+            100% { transform: translateY(-10vh) scale(1.2); opacity: 0; }
+        }
+
+        /* Typography */
+        h1, h2, h3 {
+            font-family: var(--heading-font);
+            color: var(--dark-navy);
+            text-align: center;
+            margin-bottom: 1em;
+        }
+        h1 { font-size: 3.5em; }
+        h2 { font-size: 2.5em; }
+        h3 { font-size: 1.8em; }
+
+        a { color: var(--purple-glow); text-decoration: none; }
+        a:hover { text-decoration: underline; }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+        section { padding: 60px 20px; text-align: center; }
+
+        /* Cards */
+        .card {
+            background-color: var(--dark-navy);
+            border-radius: 15px;
+            padding: 30px;
+            margin: 20px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.3);
+            border: 2px solid var(--purple-glow);
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+            color: var(--white);
+        }
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(147,51,234,0.5);
+            border-color: var(--white);
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            padding: 12px 25px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-family: var(--body-font);
+            font-weight: 600;
+            font-size: 1.1em;
+            border: none;
+            transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+            text-decoration: none;
+        }
+        .primary-btn { background-color: var(--dark-navy); color: var(--white); }
+        .primary-btn:hover { background-color: var(--purple-glow); transform: translateY(-3px); text-decoration: none; }
+        .secondary-btn { background-color: transparent; color: var(--dark-navy); border: 2px solid var(--dark-navy); }
+        .secondary-btn:hover { background-color: var(--dark-navy); color: var(--white); transform: translateY(-3px); text-decoration: none; }
+
+        /* Navbar */
+        .navbar {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 40px;
+            background-color: rgba(26,42,58,0.95);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+            z-index: 1000;
+            box-sizing: border-box;
+        }
+        .nav-left { display: flex; align-items: center; }
+        .logo-avatar {
+            width: 50px; height: 50px;
+            border-radius: 50%;
+            margin-right: 15px;
+            object-fit: cover;
+            border: 2px solid var(--purple-glow);
+        }
+        .project-name {
+            font-family: var(--heading-font);
+            font-size: 1.8em;
+            color: var(--white);
+            letter-spacing: 1px;
+        }
+
+        /* Hero */
+        .hero-section {
+            padding: 0;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 80vh;
+        }
+        .hero-banner {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            overflow: hidden;
+            z-index: -1;
+        }
+        .banner-image {
+            width: 100%; height: 100%;
+            object-fit: cover;
+            filter: brightness(0.3) grayscale(100%);
+        }
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+            padding: 40px;
+            background-color: rgba(26,42,58,0.75);
+            border-radius: 20px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+        }
+        .hero-heading {
+            font-size: 5em;
+            color: var(--white);
+            -webkit-text-stroke: 2px var(--dark-navy);
+            text-shadow: 0 0 10px rgba(255,255,255,0.5);
+            animation: textGlowPulse 2s infinite alternate;
+            margin: 0 0 10px 0;
+        }
+        @keyframes textGlowPulse {
+            0%   { text-shadow: 0 0 10px rgba(255,255,255,0.5), 0 0 20px rgba(255,255,255,0.3); }
+            100% { text-shadow: 0 0 20px rgba(255,255,255,0.8), 0 0 40px rgba(255,255,255,0.5); }
+        }
+        .hero-subheading {
+            font-size: 1.5em;
+            color: var(--light-grey);
+            margin-top: 5px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        .lore-card {
+            background-color: rgba(26,42,58,0.8);
+            border-radius: 10px;
+            padding: 25px;
+            margin: 30px auto;
+            max-width: 600px;
+            font-style: italic;
+            color: var(--light-grey);
+            border: 1px solid rgba(147,51,234,0.5);
+        }
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 40px;
+            flex-wrap: wrap;
+        }
+
+        /* About */
+        .feature-cards {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .feature-card {
+            flex: 1 1 300px;
+            max-width: 350px;
+            text-align: left;
+        }
+        .feature-card h3 { text-align: left; color: var(--white); margin-top: 0; }
+        .feature-card p { color: var(--light-grey); }
+
+        /* Whitelist Form */
+        .whitelist-form-section {
+            background-color: rgba(26,42,58,0.1);
+            padding-bottom: 80px;
+        }
+        .form-card { max-width: 500px; margin: 0 auto; }
+        .form-card input[type="text"] {
+            width: calc(100% - 24px);
+            padding: 12px 10px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            border: 2px solid var(--purple-glow);
+            background-color: rgba(255,255,255,0.1);
+            color: var(--white);
+            font-size: 1em;
+            font-family: var(--body-font);
+            display: block;
+        }
+        .form-card input[type="text"]::placeholder { color: var(--light-grey); opacity: 0.7; }
+        .form-card .primary-btn { width: 100%; padding: 15px; margin-top: 10px; box-sizing: border-box; }
+        .form-note { font-size: 0.9em; color: var(--light-grey); margin-top: 20px; }
+        .success-message { color: var(--primary-green); margin-top: 20px; font-weight: bold; font-size: 1.1em; }
+
+        /* Social Tasks */
+        .social-tasks-section { padding-top: 80px; }
+        .task-cards { display: flex; justify-content: center; flex-wrap: wrap; gap: 20px; }
+        .task-card {
+            flex: 1 1 300px;
+            max-width: 350px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            text-align: left;
+            position: relative;
+            padding-right: 60px;
+        }
+        .task-card label { font-size: 1.1em; font-weight: 600; margin-bottom: 10px; color: var(--white); }
+        .task-card .task-link {
+            background-color: var(--purple-glow);
+            color: var(--white);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            margin-top: 15px;
+            transition: background-color 0.3s ease;
+            text-decoration: none;
+        }
+        .task-card .task-link:hover { background-color: var(--white); color: var(--purple-glow); text-decoration: none; }
+        .task-card input[type="checkbox"] {
+            position: absolute;
+            right: 20px; top: 30px;
+            width: 25px; height: 25px;
+            accent-color: var(--primary-green);
+            cursor: not-allowed;
+            pointer-events: none;
+            opacity: 0.8;
+        }
+        .task-card.done { border-color: var(--primary-green); box-shadow: 0 0 20px var(--primary-green); }
+        .task-card.done label { text-decoration: line-through; color: var(--light-grey); }
+        .task-card.done .task-link { background-color: var(--primary-green); color: var(--dark-navy); }
+
+        /* Footer */
+        .footer {
+            background-color: var(--dark-navy);
+            color: var(--white);
+            padding: 30px 40px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.9em;
+            margin-top: 60px;
+            border-top: 2px solid var(--purple-glow);
+            box-sizing: border-box;
+        }
+        .footer-left, .footer-right { display: flex; align-items: center; margin-bottom: 15px; }
+        .footer-left .logo-avatar { margin-right: 15px; }
+        .footer-left p { margin: 0; }
+        .footer-right { gap: 30px; }
+        .footer-right .twitter-link { color: var(--white); font-weight: 600; transition: color 0.3s ease; }
+        .footer-right .twitter-link:hover { color: var(--purple-glow); text-decoration: none; }
+        .robinhood-text { color: var(--light-grey); margin: 0; }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .navbar { flex-direction: column; padding: 10px 20px; }
+            .nav-right { margin-top: 10px; }
+            .hero-heading { font-size: 3em; }
+            .hero-subheading { font-size: 1.2em; }
+            .cta-buttons { flex-direction: column; gap: 15px; }
+            .btn { width: 80%; margin: 0 auto; }
+            .feature-cards, .task-cards { flex-direction: column; align-items: center; }
+            .feature-card, .task-card, .form-card { max-width: 90%; margin: 15px 0; }
+            .footer { flex-direction: column; text-align: center; }
+            .footer-left, .footer-right { flex-direction: column; margin-bottom: 20px; }
+            .footer-left .logo-avatar { margin-bottom: 10px; margin-right: 0; }
+        }
+
+        @media (max-width: 480px) {
+            h1 { font-size: 2.5em; }
+            h2 { font-size: 2em; }
+            h3 { font-size: 1.5em; }
+            .project-name { font-size: 1.5em; }
+            .logo-avatar { width: 40px; height: 40px; }
+            .hero-content { padding: 20px; }
+            .btn { font-size: 1em; padding: 10px 20px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="bubble-container"></div>
+
+    <nav class="navbar">
+        <div class="nav-left">
+            <img src="logo.jpeg" alt="Glauerthood Logo" class="logo-avatar">
+            <span class="project-name">GLAUERTHOOD</span>
+        </div>
+        <div class="nav-right">
+            <a href="#whitelist-form-section" class="btn primary-btn">Join Whitelist</a>
+        </div>
+    </nav>
+
+    <header class="hero-section">
+        <div class="hero-banner">
+            <img src="logo.jpeg" alt="Glauerthood Banner" class="banner-image">
+        </div>
+        <div class="hero-content">
+            <h1 class="hero-heading">GLAUERTHOOD</h1>
+            <p class="hero-subheading">The Green Era · Coming to <a href="https://robinhood.com/crypto" target="_blank">@RobinhoodCrypto</a></p>
+            <div class="lore-card">
+                <p>Born beneath the hidden tide, the Seadragons drift between shadow and light. Each carries a different mark, a different story, and a secret from the deep. Some are guardians. Some are lost. Some were never meant to be found.</p>
+            </div>
+            <div class="cta-buttons">
+                <a href="#whitelist-form-section" class="btn primary-btn">Enter Whitelist</a>
+                <a href="#about-section" class="btn secondary-btn">Learn More</a>
+            </div>
+        </div>
+    </header>
+
+    <section id="about-section">
+        <h2>The Deep Awaits</h2>
+        <div class="feature-cards">
+            <div class="card feature-card">
+                <h3>🐉 Unique Seadragons</h3>
+                <p>Each NFT is a one-of-a-kind Seadragon with its own mark and story from the deep.</p>
+            </div>
+            <div class="card feature-card">
+                <h3>🌊 The Hidden Tide</h3>
+                <p>Drift between shadow and light. Some are guardians. Some were never meant to be found.</p>
+            </div>
+            <div class="card feature-card">
+                <h3>🔒 Whitelist Access</h3>
+                <p>Secure your spot early. Only a limited number of Seadragons will surface.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="whitelist-form-section" id="whitelist-form-section">
+        <h2>Claim Your Spot</h2>
+        <div class="card form-card">
+            <input type="text" id="wallet-address" placeholder="Enter your wallet address">
+            <input type="text" id="twitter-handle" placeholder="@yourhandle">
+            <button class="btn primary-btn" onclick="submitForm()">Join the Whitelist</button>
+            <p class="form-note">Whitelist is limited. Complete social tasks to boost your chances.</p>
+            <div id="success-message" class="success-message" style="display:none;">
+                🐉 You're on the list! Stay hidden until the tide rises.
+            </div>
+        </div>
+    </section>
+
+    <section class="social-tasks-section">
+        <h2>Complete Tasks · Rise to the Surface</h2>
+        <div class="task-cards">
+            <div class="card task-card" id="task-like">
+                <input type="checkbox" id="task1-checkbox" disabled>
+                <label for="task1-checkbox">❤️ Like the announcement post</label>
+                <a href="https://x.com/Glauerthood/status/2087494305271238733?s=20" target="_blank" class="task-link" onclick="markDone('task-like','task1-checkbox')">Go to post</a>
+            </div>
+            <div class="card task-card" id="task-retweet">
+                <input type="checkbox" id="task2-checkbox" disabled>
+                <label for="task2-checkbox">🔁 Retweet the announcement</label>
+                <a href="https://x.com/Glauerthood/status/2087494305271238733?s=20" target="_blank" class="task-link" onclick="markDone('task-retweet','task2-checkbox')">Go to post</a>
+            </div>
+            <div class="card task-card" id="task-comment">
+                <input type="checkbox" id="task3-checkbox" disabled>
+                <label for="task3-checkbox">💬 Comment on the post</label>
+                <a href="https://x.com/Glauerthood/status/2087494305271238733?s=20" target="_blank" class="task-link" onclick="markDone('task-comment','task3-checkbox')">Go to post</a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-left">
+            <img src="logo.jpeg" alt="Glauerthood Logo" class="logo-avatar">
+            <p>© 2026 Glauerthood · All rights reserved</p>
+        </div>
+        <div class="footer-right">
+            <a href="https://x.com/Glauerthood" target="_blank" class="twitter-link">@Glauerthood</a>
+            <p class="robinhood-text">Built on Robinhood Chain</p>
+        </div>
+    </footer>
+
+    <script>
+        // Form submit
+        function submitForm() {
+            var wallet = document.getElementById('wallet-address').value.trim();
+            var twitter = document.getElementById('twitter-handle').value.trim();
+            if (!wallet || !twitter) { alert('Please fill in both fields.'); return; }
+            document.getElementById('wallet-address').value = '';
+            document.getElementById('twitter-handle').value = '';
+            var msg = document.getElementById('success-message');
+            msg.style.display = 'block';
+            setTimeout(function(){ msg.style.display = 'none'; }, 5000);
+        }
+
+        // Mark task done
+        function markDone(cardId, checkboxId) {
+            var card = document.getElementById(cardId);
+            var cb = document.getElementById(checkboxId);
+            if (card) card.classList.add('done');
+            if (cb) cb.checked = true;
+            localStorage.setItem('glauerthood-' + cardId, 'done');
+        }
+
+        // Load saved task states
+        ['task-like','task-retweet','task-comment'].forEach(function(id, i) {
+            if (localStorage.getItem('glauerthood-' + id) === 'done') {
+                var card = document.getElementById(id);
+                var cb = document.getElementById('task' + (i+1) + '-checkbox');
+                if (card) card.classList.add('done');
+                if (cb) cb.checked = true;
+            }
+        });
+
+        // Generate bubbles
+        var container = document.querySelector('.bubble-container');
+        for (var i = 0; i < 20; i++) {
+            var b = document.createElement('div');
+            b.classList.add('bubble');
+            var size = Math.random() * 60 + 20;
+            b.style.width = size + 'px';
+            b.style.height = size + 'px';
+            b.style.left = (Math.random() * 100) + 'vw';
+            b.style.animationDelay = (Math.random() * 10) + 's';
+            b.style.setProperty('--duration', (Math.random() * 15 + 10) + 's');
+            b.style.backgroundColor = Math.random() < 0.5
+                ? 'rgba(74,229,74,0.12)'
+                : 'rgba(255,255,255,0.08)';
+            container.appendChild(b);
+        }
+    </script>
+</body>
+</html>
