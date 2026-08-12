@@ -37,14 +37,12 @@
             overflow: hidden;
             z-index: -1;
         }
-
         .bubble {
             position: absolute;
             border-radius: 50%;
             animation: floatUp var(--duration) infinite ease-in;
             opacity: 0;
         }
-
         @keyframes floatUp {
             0%   { transform: translateY(100vh) scale(0); opacity: 0; }
             50%  { opacity: 1; }
@@ -65,7 +63,6 @@
         a { color: var(--purple-glow); text-decoration: none; }
         a:hover { text-decoration: underline; }
 
-        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
         section { padding: 60px 20px; text-align: center; }
 
         /* Cards */
@@ -207,19 +204,12 @@
             flex-wrap: wrap;
             gap: 20px;
         }
-        .feature-card {
-            flex: 1 1 300px;
-            max-width: 350px;
-            text-align: left;
-        }
+        .feature-card { flex: 1 1 300px; max-width: 350px; text-align: left; }
         .feature-card h3 { text-align: left; color: var(--white); margin-top: 0; }
         .feature-card p { color: var(--light-grey); }
 
         /* Whitelist Form */
-        .whitelist-form-section {
-            background-color: rgba(26,42,58,0.1);
-            padding-bottom: 80px;
-        }
+        .whitelist-form-section { background-color: rgba(26,42,58,0.1); padding-bottom: 80px; }
         .form-card { max-width: 500px; margin: 0 auto; }
         .form-card input[type="text"] {
             width: calc(100% - 24px);
@@ -238,43 +228,94 @@
         .form-note { font-size: 0.9em; color: var(--light-grey); margin-top: 20px; }
         .success-message { color: var(--primary-green); margin-top: 20px; font-weight: bold; font-size: 1.1em; }
 
-        /* Social Tasks */
-        .social-tasks-section { padding-top: 80px; }
-        .task-cards { display: flex; justify-content: center; flex-wrap: wrap; gap: 20px; }
-        .task-card {
-            flex: 1 1 300px;
-            max-width: 350px;
+        /* ── SOCIAL TASKS – new steplist design (no boxes) ── */
+        .social-tasks-section { padding: 80px 20px; }
+
+        .task-list {
+            max-width: 650px;
+            margin: 0 auto;
             display: flex;
             flex-direction: column;
-            align-items: flex-start;
-            text-align: left;
-            position: relative;
-            padding-right: 60px;
+            gap: 0;
         }
-        .task-card label { font-size: 1.1em; font-weight: 600; margin-bottom: 10px; color: var(--white); }
-        .task-card .task-link {
-            background-color: var(--purple-glow);
+
+        .task-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+            padding: 28px 0;
+            border-bottom: 1px solid rgba(26,42,58,0.3);
+            position: relative;
+            transition: opacity 0.3s ease;
+        }
+        .task-item:last-child { border-bottom: none; }
+
+        .task-number {
+            flex-shrink: 0;
+            width: 48px; height: 48px;
+            border-radius: 50%;
+            background-color: var(--dark-navy);
+            border: 2px solid var(--purple-glow);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--heading-font);
+            font-size: 1.4em;
             color: var(--white);
-            padding: 8px 15px;
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+
+        .task-body {
+            flex: 1;
+            text-align: left;
+        }
+        .task-body strong {
+            display: block;
+            font-size: 1.15em;
+            color: var(--dark-navy);
+            margin-bottom: 4px;
+        }
+        .task-body p {
+            margin: 0 0 12px 0;
+            font-size: 0.9em;
+            color: rgba(26,42,58,0.75);
+        }
+        .task-action-link {
+            display: inline-block;
+            background-color: var(--dark-navy);
+            color: var(--white);
+            padding: 8px 20px;
             border-radius: 20px;
             font-size: 0.9em;
-            margin-top: 15px;
-            transition: background-color 0.3s ease;
+            font-weight: 600;
+            transition: background-color 0.3s ease, transform 0.2s ease;
             text-decoration: none;
         }
-        .task-card .task-link:hover { background-color: var(--white); color: var(--purple-glow); text-decoration: none; }
-        .task-card input[type="checkbox"] {
-            position: absolute;
-            right: 20px; top: 30px;
-            width: 25px; height: 25px;
-            accent-color: var(--primary-green);
-            cursor: not-allowed;
-            pointer-events: none;
-            opacity: 0.8;
+        .task-action-link:hover {
+            background-color: var(--purple-glow);
+            transform: translateY(-2px);
+            text-decoration: none;
         }
-        .task-card.done { border-color: var(--primary-green); box-shadow: 0 0 20px var(--primary-green); }
-        .task-card.done label { text-decoration: line-through; color: var(--light-grey); }
-        .task-card.done .task-link { background-color: var(--primary-green); color: var(--dark-navy); }
+
+        /* Done state */
+        .task-item.done .task-number {
+            background-color: #22c55e;
+            border-color: #22c55e;
+        }
+        .task-item.done .task-number::after {
+            content: '✓';
+            font-size: 1.2em;
+        }
+        .task-item.done .task-number span { display: none; }
+        .task-item.done .task-body strong {
+            text-decoration: line-through;
+            color: rgba(26,42,58,0.5);
+        }
+        .task-item.done .task-action-link {
+            background-color: #22c55e;
+            pointer-events: none;
+        }
+        .task-item.done .task-action-link::after { content: ' ✓'; }
 
         /* Footer */
         .footer {
@@ -306,13 +347,12 @@
             .hero-subheading { font-size: 1.2em; }
             .cta-buttons { flex-direction: column; gap: 15px; }
             .btn { width: 80%; margin: 0 auto; }
-            .feature-cards, .task-cards { flex-direction: column; align-items: center; }
-            .feature-card, .task-card, .form-card { max-width: 90%; margin: 15px 0; }
+            .feature-cards { flex-direction: column; align-items: center; }
+            .feature-card, .form-card { max-width: 90%; margin: 15px 0; }
             .footer { flex-direction: column; text-align: center; }
             .footer-left, .footer-right { flex-direction: column; margin-bottom: 20px; }
             .footer-left .logo-avatar { margin-bottom: 10px; margin-right: 0; }
         }
-
         @media (max-width: 480px) {
             h1 { font-size: 2.5em; }
             h2 { font-size: 2em; }
@@ -329,7 +369,7 @@
 
     <nav class="navbar">
         <div class="nav-left">
-            <img src="logo.jpeg" alt="Glauerthood Logo" class="logo-avatar">
+            <img src="/static/logo.jpeg" alt="Glauerthood Logo" class="logo-avatar">
             <span class="project-name">GLAUERTHOOD</span>
         </div>
         <div class="nav-right">
@@ -339,7 +379,7 @@
 
     <header class="hero-section">
         <div class="hero-banner">
-            <img src="logo.jpeg" alt="Glauerthood Banner" class="banner-image">
+            <img src="/static/logo.jpeg" alt="Glauerthood Banner" class="banner-image">
         </div>
         <div class="hero-content">
             <h1 class="hero-heading">GLAUERTHOOD</h1>
@@ -387,28 +427,51 @@
 
     <section class="social-tasks-section">
         <h2>Complete Tasks · Rise to the Surface</h2>
-        <div class="task-cards">
-            <div class="card task-card" id="task-like">
-                <input type="checkbox" id="task1-checkbox" disabled>
-                <label for="task1-checkbox">❤️ Like the announcement post</label>
-                <a href="https://x.com/Glauerthood/status/2087494305271238733?s=20" target="_blank" class="task-link" onclick="markDone('task-like','task1-checkbox')">Go to post</a>
+
+        <div class="task-list">
+
+            <div class="task-item" id="task-like">
+                <div class="task-number"><span>❤️</span></div>
+                <div class="task-body">
+                    <strong>Like the announcement post</strong>
+                    <p>Show your support — tap the heart on our launch post.</p>
+                    <a href="https://x.com/Glauerthood/status/2087494305271238733?s=20"
+                       target="_blank"
+                       class="task-action-link"
+                       onclick="markDone('task-like')">Go to post</a>
+                </div>
             </div>
-            <div class="card task-card" id="task-retweet">
-                <input type="checkbox" id="task2-checkbox" disabled>
-                <label for="task2-checkbox">🔁 Retweet the announcement</label>
-                <a href="https://x.com/Glauerthood/status/2087494305271238733?s=20" target="_blank" class="task-link" onclick="markDone('task-retweet','task2-checkbox')">Go to post</a>
+
+            <div class="task-item" id="task-retweet">
+                <div class="task-number"><span>🔁</span></div>
+                <div class="task-body">
+                    <strong>Retweet the announcement</strong>
+                    <p>Spread the word to the surface. Retweet our post.</p>
+                    <a href="https://x.com/Glauerthood/status/2087494305271238733?s=20"
+                       target="_blank"
+                       class="task-action-link"
+                       onclick="markDone('task-retweet')">Go to post</a>
+                </div>
             </div>
-            <div class="card task-card" id="task-comment">
-                <input type="checkbox" id="task3-checkbox" disabled>
-                <label for="task3-checkbox">💬 Comment on the post</label>
-                <a href="https://x.com/Glauerthood/status/2087494305271238733?s=20" target="_blank" class="task-link" onclick="markDone('task-comment','task3-checkbox')">Go to post</a>
+
+            <div class="task-item" id="task-comment">
+                <div class="task-number"><span>💬</span></div>
+                <div class="task-body">
+                    <strong>Comment on the post</strong>
+                    <p>Drop a comment and let us know you're from the deep.</p>
+                    <a href="https://x.com/Glauerthood/status/2087494305271238733?s=20"
+                       target="_blank"
+                       class="task-action-link"
+                       onclick="markDone('task-comment')">Go to post</a>
+                </div>
             </div>
+
         </div>
     </section>
 
     <footer class="footer">
         <div class="footer-left">
-            <img src="logo.jpeg" alt="Glauerthood Logo" class="logo-avatar">
+            <img src="/static/logo.jpeg" alt="Glauerthood Logo" class="logo-avatar">
             <p>© 2026 Glauerthood · All rights reserved</p>
         </div>
         <div class="footer-right">
@@ -418,7 +481,6 @@
     </footer>
 
     <script>
-        // Form submit
         function submitForm() {
             var wallet = document.getElementById('wallet-address').value.trim();
             var twitter = document.getElementById('twitter-handle').value.trim();
@@ -430,26 +492,19 @@
             setTimeout(function(){ msg.style.display = 'none'; }, 5000);
         }
 
-        // Mark task done
-        function markDone(cardId, checkboxId) {
-            var card = document.getElementById(cardId);
-            var cb = document.getElementById(checkboxId);
-            if (card) card.classList.add('done');
-            if (cb) cb.checked = true;
+        function markDone(cardId) {
+            var item = document.getElementById(cardId);
+            if (item) item.classList.add('done');
             localStorage.setItem('glauerthood-' + cardId, 'done');
         }
 
-        // Load saved task states
-        ['task-like','task-retweet','task-comment'].forEach(function(id, i) {
+        ['task-like','task-retweet','task-comment'].forEach(function(id) {
             if (localStorage.getItem('glauerthood-' + id) === 'done') {
-                var card = document.getElementById(id);
-                var cb = document.getElementById('task' + (i+1) + '-checkbox');
-                if (card) card.classList.add('done');
-                if (cb) cb.checked = true;
+                var item = document.getElementById(id);
+                if (item) item.classList.add('done');
             }
         });
 
-        // Generate bubbles
         var container = document.querySelector('.bubble-container');
         for (var i = 0; i < 20; i++) {
             var b = document.createElement('div');
