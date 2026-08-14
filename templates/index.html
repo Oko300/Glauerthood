@@ -580,6 +580,17 @@
     <h2 class="section-title">Rise to the Surface</h2>
     <div class="task-list">
 
+        <div class="task-row" id="task-follow">
+            <div class="task-num" id="tnum0">👤</div>
+            <div class="task-text">
+                <strong>Follow @Glauerthood on X</strong>
+                <span>The most important step — join the community</span>
+            </div>
+            <a href="https://x.com/Glauerthood"
+               target="_blank" class="task-btn"
+               onclick="markDone('task-follow','tnum0')">Follow →</a>
+        </div>
+
         <div class="task-row" id="task-like">
             <div class="task-num" id="tnum1">❤️</div>
             <div class="task-text">
@@ -647,7 +658,7 @@
         if (row) row.classList.add('done');
         localStorage.setItem('gld-' + rowId, '1');
     }
-    ['task-like','task-rt','task-cmt'].forEach(function(id) {
+    ['task-follow','task-like','task-rt','task-cmt'].forEach(function(id) {
         if (localStorage.getItem('gld-' + id)) {
             var el = document.getElementById(id);
             if (el) el.classList.add('done');
