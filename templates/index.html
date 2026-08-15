@@ -288,74 +288,6 @@
             text-align: left;
         }
 
-        /* ── WHITELIST FORM ── */
-        .wl-section {
-            padding: 100px 24px;
-            background: var(--navy);
-            position: relative;
-            overflow: hidden;
-        }
-        .wl-section::before {
-            content: '';
-            position: absolute;
-            top: -100px; left: 50%;
-            transform: translateX(-50%);
-            width: 600px; height: 300px;
-            background: radial-gradient(ellipse, rgba(61,212,74,0.08) 0%, transparent 70%);
-            pointer-events: none;
-        }
-        .wl-section .section-label { color: rgba(240,244,240,0.4); }
-        .wl-section .section-title { color: var(--white); margin-bottom: 48px; }
-        .wl-form-wrap {
-            max-width: 480px;
-            margin: 0 auto;
-        }
-        .wl-input {
-            width: 100%;
-            background: rgba(255,255,255,0.05);
-            border: 1px solid rgba(124,58,237,0.35);
-            border-radius: 8px;
-            padding: 14px 18px;
-            color: var(--white);
-            font-family: var(--body);
-            font-size: 0.95em;
-            margin-bottom: 14px;
-            outline: none;
-            transition: border-color 0.2s;
-        }
-        .wl-input:focus { border-color: var(--purple-light); }
-        .wl-input::placeholder { color: rgba(240,244,240,0.3); }
-        .wl-submit {
-            width: 100%;
-            background: var(--green);
-            color: var(--navy);
-            border: none;
-            padding: 15px;
-            border-radius: 8px;
-            font-family: var(--body);
-            font-size: 1em;
-            font-weight: 700;
-            cursor: pointer;
-            letter-spacing: 0.3px;
-            margin-top: 6px;
-            transition: background 0.2s, transform 0.15s;
-        }
-        .wl-submit:hover { background: var(--green-light); transform: translateY(-2px); }
-        .wl-note {
-            text-align: center;
-            font-size: 0.8em;
-            color: rgba(240,244,240,0.3);
-            margin-top: 16px;
-        }
-        .wl-success {
-            display: none;
-            text-align: center;
-            margin-top: 20px;
-            color: var(--green-light);
-            font-weight: 600;
-            font-size: 1em;
-        }
-
         /* ── TASKS ── */
         .tasks-section {
             padding: 100px 24px;
@@ -416,6 +348,108 @@
         .task-row.done .task-num { background: #22c55e; }
         .task-row.done .task-text strong { text-decoration: line-through; opacity: 0.5; }
         .task-row.done .task-btn { background: #22c55e; border-color: #22c55e; color: white; pointer-events: none; }
+
+        /* ── WHITELIST CLAIM FORM ── */
+        .claim-section {
+            padding: 80px 24px 100px;
+            background: var(--navy);
+            position: relative;
+            overflow: hidden;
+        }
+        .claim-section::before {
+            content: '';
+            position: absolute;
+            top: -100px; left: 50%;
+            transform: translateX(-50%);
+            width: 600px; height: 300px;
+            background: radial-gradient(ellipse, rgba(61,212,74,0.08) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        .claim-section .section-label { color: rgba(240,244,240,0.4); }
+        .claim-section .section-title { color: var(--white); margin-bottom: 12px; }
+        .claim-desc {
+            text-align: center;
+            color: rgba(240,244,240,0.5);
+            font-size: 0.9em;
+            margin-bottom: 40px;
+        }
+        .claim-form-wrap {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        .claim-field {
+            margin-bottom: 20px;
+        }
+        .claim-field label {
+            display: block;
+            font-size: 0.82em;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: rgba(240,244,240,0.55);
+            margin-bottom: 8px;
+        }
+        .claim-field label span.req {
+            color: var(--green-light);
+            margin-left: 3px;
+        }
+        .claim-input {
+            width: 100%;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(124,58,237,0.35);
+            border-radius: 8px;
+            padding: 14px 18px;
+            color: var(--white);
+            font-family: var(--body);
+            font-size: 0.95em;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+        .claim-input:focus { border-color: var(--purple-light); background: rgba(255,255,255,0.07); }
+        .claim-input::placeholder { color: rgba(240,244,240,0.25); }
+        .claim-submit {
+            width: 100%;
+            background: var(--green);
+            color: var(--navy);
+            border: none;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: var(--body);
+            font-size: 1em;
+            font-weight: 700;
+            cursor: pointer;
+            letter-spacing: 0.3px;
+            margin-top: 8px;
+            transition: background 0.2s, transform 0.15s;
+        }
+        .claim-submit:hover { background: var(--green-light); transform: translateY(-2px); }
+        .claim-submit:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+        .claim-success {
+            display: none;
+            text-align: center;
+            margin-top: 24px;
+            padding: 18px 24px;
+            background: rgba(34,197,94,0.12);
+            border: 1px solid rgba(34,197,94,0.4);
+            border-radius: 10px;
+            color: var(--green-light);
+            font-weight: 600;
+            font-size: 1em;
+            line-height: 1.6;
+        }
+        .claim-error {
+            display: none;
+            text-align: center;
+            margin-top: 16px;
+            color: #f87171;
+            font-size: 0.88em;
+        }
+        .claim-note {
+            text-align: center;
+            font-size: 0.78em;
+            color: rgba(240,244,240,0.25);
+            margin-top: 16px;
+        }
 
         /* ── FOOTER ── */
         .footer {
@@ -499,7 +533,7 @@
         <div class="nav-logo-fallback" id="navFallback">G</div>
         <span class="nav-name">GLAUERTHOOD</span>
     </a>
-    <a href="#whitelist" class="nav-btn">Join Whitelist</a>
+    <a href="#claim" class="nav-btn">Claim Spot</a>
 </nav>
 
 <!-- HERO -->
@@ -513,7 +547,7 @@
             Born beneath the hidden tide, the Seadragons drift between shadow and light. Each carries a different mark, a different story, and a secret from the deep. Some are guardians. Some are lost. Some were never meant to be found.
         </div>
         <div class="hero-actions">
-            <a href="#whitelist" class="btn-primary">Enter Whitelist</a>
+            <a href="#tasks" class="btn-primary">Complete Tasks</a>
             <a href="#about" class="btn-outline">Learn More</a>
         </div>
     </div>
@@ -528,7 +562,6 @@
     <div class="features">
         <div class="feature">
             <div class="feature-icon">
-                <!-- sparkles / unique -->
                 <svg viewBox="0 0 24 24"><path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6z"/></svg>
             </div>
             <div class="feature-body">
@@ -538,7 +571,6 @@
         </div>
         <div class="feature">
             <div class="feature-icon">
-                <!-- waves -->
                 <svg viewBox="0 0 24 24"><path d="M2 12c2-4 4-4 6 0s4 4 6 0 4-4 6 0"/><path d="M2 17c2-4 4-4 6 0s4 4 6 0 4-4 6 0"/><path d="M2 7c2-4 4-4 6 0s4 4 6 0 4-4 6 0"/></svg>
             </div>
             <div class="feature-body">
@@ -548,31 +580,17 @@
         </div>
         <div class="feature">
             <div class="feature-icon">
-                <!-- shield / access -->
                 <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
             </div>
             <div class="feature-body">
                 <h3>Whitelist Access</h3>
-                <p>Secure your spot before the surface breaks. Only a limited number of Seadragons will emerge in the first wave.</p>
+                <p>Complete the social tasks below, then submit your details to secure your spot. Only a limited number of Seadragons will emerge in the first wave.</p>
             </div>
         </div>
     </div>
 </section>
 
 <div class="divider"></div>
-
-<!-- WHITELIST FORM -->
-<section class="wl-section" id="whitelist">
-    <p class="section-label">Early Access</p>
-    <h2 class="section-title">Claim Your Spot</h2>
-    <div class="wl-form-wrap">
-        <input type="text" class="wl-input" id="wallet" placeholder="Wallet address">
-        <input type="text" class="wl-input" id="twitter" placeholder="@yourhandle">
-        <button class="wl-submit" onclick="submitWL()">Join the Whitelist →</button>
-        <p class="wl-note">Whitelist is limited. Complete social tasks below to boost your chances.</p>
-        <div class="wl-success" id="wlSuccess">🐉 You're on the list. Stay hidden until the tide rises.</div>
-    </div>
-</section>
 
 <!-- TASKS -->
 <section class="tasks-section" id="tasks">
@@ -627,6 +645,43 @@
     </div>
 </section>
 
+<!-- CLAIM SPOT FORM -->
+<section class="claim-section" id="claim">
+    <p class="section-label">Early Access</p>
+    <h2 class="section-title">Claim Your Spot</h2>
+    <p class="claim-desc">Done with the tasks above? Submit your details below to lock in your whitelist spot.</p>
+
+    <div class="claim-form-wrap">
+
+        <div class="claim-field">
+            <label>X Username <span class="req">*</span></label>
+            <input type="text" class="claim-input" id="cf-username" placeholder="@yourhandle">
+        </div>
+
+        <div class="claim-field">
+            <label>Paste link to your comment on the pinned post <span class="req">*</span></label>
+            <input type="url" class="claim-input" id="cf-comment" placeholder="https://x.com/...">
+        </div>
+
+        <div class="claim-field">
+            <label>Wallet Address <span class="req">*</span></label>
+            <input type="text" class="claim-input" id="cf-wallet" placeholder="Your wallet address">
+        </div>
+
+        <button class="claim-submit" id="claimBtn" onclick="submitClaim()">
+            Submit &amp; Secure My Spot →
+        </button>
+
+        <div class="claim-success" id="claimSuccess">
+            🐉 You're on the list. Stay hidden until the tide rises.
+        </div>
+        <div class="claim-error" id="claimError">
+            Please fill in all required fields.
+        </div>
+        <p class="claim-note">Your details are kept private and used only for whitelist selection.</p>
+    </div>
+</section>
+
 <!-- FOOTER -->
 <footer class="footer">
     <div class="footer-left">
@@ -640,19 +695,51 @@
 </footer>
 
 <script>
-    // Form
-    function submitWL() {
-        var w = document.getElementById('wallet').value.trim();
-        var t = document.getElementById('twitter').value.trim();
-        if (!w || !t) { alert('Please fill in both fields.'); return; }
-        document.getElementById('wallet').value = '';
-        document.getElementById('twitter').value = '';
-        var s = document.getElementById('wlSuccess');
-        s.style.display = 'block';
-        setTimeout(function(){ s.style.display = 'none'; }, 6000);
+    /* ── CLAIM FORM → Google Forms (no redirect, no visible URL) ── */
+    async function submitClaim() {
+        var username = document.getElementById('cf-username').value.trim();
+        var comment  = document.getElementById('cf-comment').value.trim();
+        var wallet   = document.getElementById('cf-wallet').value.trim();
+        var errEl    = document.getElementById('claimError');
+        var successEl = document.getElementById('claimSuccess');
+        var btn      = document.getElementById('claimBtn');
+
+        errEl.style.display = 'none';
+        successEl.style.display = 'none';
+
+        if (!username || !comment || !wallet) {
+            errEl.style.display = 'block';
+            return;
+        }
+
+        btn.disabled = true;
+        btn.textContent = 'Submitting…';
+
+        var formData = new FormData();
+        formData.append('entry.633272929',  username);
+        formData.append('entry.435556953',  comment);
+        formData.append('entry.2037621319', wallet);
+
+        try {
+            await fetch(
+                'https://docs.google.com/forms/d/e/1FAIpQLSfSsgJWuPK3NdD7td8xE7GlmOIoki-J_uBUFWwq8sQgwnpF_w/formResponse',
+                { method: 'POST', mode: 'no-cors', body: formData }
+            );
+        } catch(e) {
+            // no-cors swallows errors; submission still goes through
+        }
+
+        /* clear fields */
+        document.getElementById('cf-username').value = '';
+        document.getElementById('cf-comment').value  = '';
+        document.getElementById('cf-wallet').value   = '';
+
+        btn.disabled = false;
+        btn.textContent = 'Submit & Secure My Spot →';
+        successEl.style.display = 'block';
     }
 
-    // Tasks
+    /* ── TASKS ── */
     function markDone(rowId, numId) {
         var row = document.getElementById(rowId);
         if (row) row.classList.add('done');
@@ -665,7 +752,7 @@
         }
     });
 
-    // Bubbles
+    /* ── BUBBLES ── */
     var bc = document.getElementById('bubbles');
     for (var i = 0; i < 18; i++) {
         var b = document.createElement('div');
