@@ -420,10 +420,10 @@
 </section>
 
 <!-- AS SEEN ON -->
-class="seen-logo" style="filter: invert(1);"
+<section class="seen-on">
     <p class="seen-label">As Seen On</p>
     <a href="https://nftcalendar.io/b/robinhood/" target="_blank" class="seen-link" rel="noopener">
-       src="/static/nftcalendar.svg"
+        <img src="/static/nftcalendar.svg" alt="NFT Calendar" class="seen-logo" style="filter: invert(1);">
         <span class="seen-name">NFT Calendar</span>
     </a>
 </section>
@@ -441,10 +441,6 @@ class="seen-logo" style="filter: invert(1);"
 </footer>
 
 <script>
-    // Silent Google Form submission
-    // entry.633272929  = X Username
-    // entry.435556953  = RT+Like+Comment link
-    // entry.2037621319 = Wallet address
     var FORM_ACTION = 'https://docs.google.com/forms/d/e/1FAIpQLSfSsgJWuPK3NdD7td8xE7GlmOIoki-J_uBUFWwq8sQgwnpF_w/formResponse';
 
     function submitWL() {
@@ -463,13 +459,11 @@ class="seen-logo" style="filter: invert(1);"
             return;
         }
 
-        // Build form data
         var data = new FormData();
         data.append('entry.633272929',  username);
         data.append('entry.435556953',  comment);
         data.append('entry.2037621319', wallet);
 
-        // Silent submit via no-cors fetch (response is opaque but form saves)
         fetch(FORM_ACTION, { method: 'POST', mode: 'no-cors', body: data })
             .then(function() {
                 document.getElementById('f-username').value = '';
@@ -483,7 +477,6 @@ class="seen-logo" style="filter: invert(1);"
             });
     }
 
-    // Mark tasks done
     function markDone(id) {
         var el = document.getElementById(id);
         if (el) el.classList.add('done');
